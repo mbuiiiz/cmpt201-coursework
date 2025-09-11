@@ -1,0 +1,33 @@
+/*
+ *File name : lab1.c
+ *
+ *Author: Mike Bui
+ *
+ *Description: A program that receives the full line of user input, tokenizes it
+ *with the delimiter, and prints out each token one at a time on a new line.
+ *
+ * Date: Sep 10, 2025
+ * */
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+int main() {
+  // Asking message
+  printf("Please enter some text: ");
+
+  char *line = NULL; // buffer for getline
+  size_t size = 0;   // to track buffer size
+
+  // Read input
+  if (getline(&line, &size, stdin) != 1) {
+    char *token;
+    char *after = line; // Store the character after
+    while ((token = strtok_r(after, " ", &after)) == true) {
+      printf("%s\n", token);
+    }
+  }
+
+  free(line);
+}
