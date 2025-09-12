@@ -32,8 +32,8 @@ int main() {
     }
 
   } else { // In case getline() fails
-    perror("getline failed");
-    exit(EXIT_FAILURE);
+    free(line);
+    return 1;
   }
 
   free(line);
