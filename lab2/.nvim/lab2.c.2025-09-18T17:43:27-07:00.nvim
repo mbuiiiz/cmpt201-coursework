@@ -1,0 +1,29 @@
+/*
+ * File name: lab2.c
+ *
+ * Author: Mike Bui
+ *
+ * Description: A program that receives the user's input from the keyboard that is the full path of
+ * the program to run
+ *
+ * Date: Sep 2025
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+// Variables
+char* buffer = NULL;
+size_t size = 0; // to track the size
+
+// Keep scanning until it fails
+if(getline(&buffer, &size, stdin) != -1)
+{
+  printf("Enter program to run.");
+
+
+}
+    
+}

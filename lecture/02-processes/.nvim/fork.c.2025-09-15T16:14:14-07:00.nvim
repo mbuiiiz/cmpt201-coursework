@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+  printf("Start PID=%d, parent PID=%d", getpid(), getppid());
+
+  pid_t pid = fork();
+  printf("PARENT:  %d\n", getppid());
+  printf("CHILD:: %d\n", getpid());
+
+  printf("Done");
+}

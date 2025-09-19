@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() { 
+  
+// Fork
+  pid_t pid = fork();
+
+if(pid == 0){
+// Child exec
+  execl("/bin/ls", "/bin/ls", "-alh", NULL);
+  printf("Child\n");
+}else{
+// Parent exec
+  execl("/bin/ls", "/bin/ls", "-a", NULL);
+  printf("Parent\n");
+}
+
+printf("Hi");
+}
+
+

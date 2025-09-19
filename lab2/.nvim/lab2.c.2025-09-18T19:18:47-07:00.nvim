@@ -1,0 +1,62 @@
+/*
+ * File name: lab2.c
+ *
+ * Author: Mike Bui
+ *
+ * Description: A program that receives the user's input from the keyboard that
+ * is the full path of the program to run
+ *
+ * Date: Sep 2025
+ */
+
+#define _POSIX_C_SOURCE 200809L
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main() {
+  // Variables
+  char *buffer = NULL; // buffer
+  size_t size = 0;     // to track the size
+
+  printf("Enter program to run.\n");
+
+  // Keep scanning until getline() fails
+  while (getline(&buffer, &size, stdin) != -1) {
+
+    // Removing the trailing new line
+    /*buffer[strcspn(buffer, "\n")] = '\0';*/
+
+    // Fork
+    pid_t pid = fork();
+
+    // If fork failed
+    if (pid < 0) {
+      perror("fork failed");
+      exit(1);
+    }
+
+    // Running the output from buffer
+    if (pid == 0) {
+      // execl the child process
+      execl(buffer, buffer, NULL);
+
+      // In case execl didn't run
+      free(buffer);
+      perror("execl didn't get executed");
+      exit(1);
+    } else {
+      // Wait child to finish to rerun the loop
+      int status;
+      waitpid(pid, &status, 0);
+    }
+    printf("Enter program to run.\n");
+
+  }
+
+  return 1;
+}

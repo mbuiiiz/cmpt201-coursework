@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+  fork();
+  for(int i = 0; i < 20; i++) {
+    printf("Sleeping: %d", i);
+    sleep(1);
+  }
+  
+  printf("Done");
+}
+

@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main() {
+
+  // Fork
+  pid_t pid = fork();
+
+  if (pid == 0) {
+    // Child exec
+    sleep(5);
+    printf("Child\n");
+    char *args[] = {"/bin/ls", "-a", "-l", "-h", NULL};
+    execv("/bin/ls", args);
+  } else {
+    // Parent exec
+    printf("Parent\n");
+    execl("/bin/ls", "/bin/ls", "-a", NULL);
+  }
+}
