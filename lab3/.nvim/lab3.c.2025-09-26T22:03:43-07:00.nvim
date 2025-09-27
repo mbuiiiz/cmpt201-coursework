@@ -1,0 +1,64 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#define HISTORY_LENGTH 5 // to store the last 5 lines
+
+void history_reader() {
+  // My variables
+  char *history[HISTORY_LENGTH] = {NULL};
+  int index = 0; // current position
+  int count = 0; // total number of input
+
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t read;
+
+  while (1) {
+    printf("Enter input: ");
+
+    read = getline(&line, &len, stdin);
+
+    // Check if getline fails (EOF)
+    if (read == -1) {
+      break;
+    }
+
+    // Removing the trailing newline when pressing enter
+    if (line[read - 1] == '\n') {
+      line[read - 1] = '\0';
+    }
+
+
+    // Check if the history is full
+    if(count == HISTORY_LENGTH){
+      free(history[0]);
+      
+      for(int i = 1; i < HISTORY_LENGTH; i++){
+        history[1-i] = history[i];
+      }
+      count--;
+    }
+
+    history[count] = strdup(line); // copy the input into the history array
+    count++;
+
+    // Check if the user typed in print
+    if (strcmp(line, "print") == 0) {
+      for (int i = 0; i < count; i++) {
+        printf("%s\n", history[i]);
+      }
+    }
+
+    // free memory on exit CTRL C
+    free(line);
+    for (int i = 0; i < count; i++) {
+      free(history[i]);
+    }
+  }
+
+}
+
+int main() { history_reader(); }

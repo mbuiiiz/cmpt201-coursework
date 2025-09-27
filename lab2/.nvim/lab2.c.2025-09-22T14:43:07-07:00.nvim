@@ -53,10 +53,6 @@ int main() {
       // Wait child to finish to rerun the loop
       int status; // to store status value
       waitpid(pid, &status, 0);
-
-      if (WIFEXITED(status)) {
-        printf("Reason: %d\n", WEXITSTATUS(status));
-      }
     }
     printf("Enter program to run.\n> ");
   }

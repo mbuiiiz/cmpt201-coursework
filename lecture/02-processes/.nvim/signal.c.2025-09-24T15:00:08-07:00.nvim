@@ -1,0 +1,10 @@
+#define _POSIX_C_SOURCE 200809
+#include <signal.h>
+#include <stdio.h>
+#include <unistd.h>
+
+static void signal_handler(int signum, struct sigaction *act, struct sigaction *oldact)
+{
+  
+
+}
