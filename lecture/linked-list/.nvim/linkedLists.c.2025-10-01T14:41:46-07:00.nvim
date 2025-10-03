@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+  int data;
+  struct Node *next;
+};
+
+struct Node *createNode(int data){
+  struct Node *newNode = malloc(sizeof(*newNode));
+  newNode->data = data;
+  newNode->next = NULL;
+  return newNode;
+}
+
+
+
+void traverse(struct Node *head){
+  struct Node *current = head;
+  while(current){
+    current = current->next;
+  }
+}
+
+void append(struct Node **head, int data){
+  struct Node *newNode = createNode(data);
+  struct Node **current = head; 
+  traverse(*current);
+
+  current->next = newNode;
+}

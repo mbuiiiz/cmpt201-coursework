@@ -1,0 +1,70 @@
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+  int data;
+  struct Node *next;
+};
+
+struct Node *createNode(int data) {
+  struct Node *newNode = malloc(sizeof(struct Node));
+  if (newNode == NULL) {
+    free(newNode);
+    return NULL;
+  }
+  newNode->data = data;
+  newNode->next = NULL;
+  return newNode;
+}
+
+void traverse(struct Node *head) {
+  struct Node *current = head;
+
+  while (current->next) {
+    printf("%d", current->data);
+    current = current->next;
+  }
+
+  printf("\n");
+}
+
+void append(struct Node **head, int data) {
+  struct Node *newNode = createNode(data);
+
+  if (*head == NULL) {
+    *head = newNode;
+    return;
+  } else {
+    // Find end of list
+    struct Node *current = *head;
+
+    while (current->next != NULL) {
+      current = current->next;
+    }
+
+    // Append new node
+    current->next = newNode;
+  }
+}
+
+int main() {
+  struct Node *head = NULL;
+
+  // Print
+  append(&head, 4);
+  append(&head, 5);
+  append(&head, 7);
+  append(&head, 8);
+  traverse(head);
+
+  // We need to free these memory
+  struct Node *current = head;
+  while (current->next) {
+    struct Node *tobeFree = current;
+    current = current->next;
+    free(tobeFree);
+  }
+  return 0;
+}

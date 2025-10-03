@@ -1,0 +1,6 @@
+#define _POSIX_C_SOUCE 200809L
+#define _DEFAULT_SOURCE 
+#include <features.h>
+#include <unistd.h>
+
+int main() { sbrk(0); }

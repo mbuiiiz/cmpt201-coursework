@@ -1,0 +1,56 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+  int data;
+  struct Node *next;
+};
+
+struct Node *createNode(int data) {
+  struct Node *newNode = malloc(sizeof(*newNode));
+  newNode->data = data;
+  newNode->next = NULL;
+  return newNode;
+}
+
+void traverse(struct Node *head) {
+  struct Node *current = head;
+
+  while (current->next) {
+    printf("%d", current->data);
+    current = current->next;
+  }
+
+  printf("\n");
+}
+
+void append(struct Node **head, int data) {
+  if (head == NULL) {
+    *head = malloc(sizeof(struct Node));
+    *head = createNode(data);
+  } else {
+    // Find end of list
+    struct Node *current = *head;
+
+    while (current->next) {
+      current = current->next;
+    }
+
+    // Append new node
+    current->next = createNode(data);
+  }
+}
+
+int main() {
+  struct Node *head = NULL;
+
+  // Print
+  append(&head, 4);
+  append(&head, 5);
+  append(&head, 7);
+  append(&head, 8);
+  traverse(head);
+
+  return 0;
+}
