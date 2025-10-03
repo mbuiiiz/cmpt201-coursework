@@ -58,13 +58,13 @@ int main() {
   memset((char *)data_ptr1, 0, 112);
 
   // initialize second block
-  struct header *my_stack2 = (struct header *)((char *)my_stack1 + 128);
+  struct header *my_stack2 = (struct header *)((char*)my_stack1 + 128);
   my_stack2->size = BLOCK_SIZE;
   my_stack2->next = my_stack1;
 
   // fill up the memory from stack2
   char *data_ptr2 = (char *)(my_stack2 + 1);
-  memset((char *)data_ptr2, 1, 112);
+  memset(data_ptr2, 1, 112);
 
   // printing out the output
   print_out("first block: %p\n", &my_stack1, sizeof(my_stack1));
@@ -81,11 +81,11 @@ int main() {
             sizeof(my_stack2->next));
 
   // printing out the data
-  for (unsigned int i = 0; i < 112; i++) {
+  for (unsigned int i = 0; i < 100; i++) {
     printf("%d\n", data_ptr1[i]);
   }
 
-  for (unsigned int i = 0; i < 112; i++) {
+  for (unsigned int i = 0; i < 100; i++) {
     printf("%d\n", data_ptr2[i]);
   }
 }
