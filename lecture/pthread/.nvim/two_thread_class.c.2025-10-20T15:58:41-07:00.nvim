@@ -1,0 +1,22 @@
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+void *my_thread(void *arg) {
+  char *message = arg;
+  printf("Inside a thread!\n");
+  printf("Message is: %s\n", message);
+  return (void*)strlen(message);
+}
+
+int main(void) {
+
+  printf("Hello World\n");
+  pthread_t thread_id;
+
+  pthread_create(&thread_id, NULL, my_thread, "Hello threads");
+  pthread_join(thread_id, NULL);
+  /*sleep(5);*/
+  printf("Done.\n");
+}
