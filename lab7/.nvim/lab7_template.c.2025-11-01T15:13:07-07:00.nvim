@@ -67,6 +67,7 @@ int main() {
   for (int i = 0; i < result_count; i++) {
     if (output_results[i].count > 0) {
       reduce(&output_results[i]);
+      fflush(stdout);
     }
   }
 
@@ -106,7 +107,7 @@ void groupByKey(IntermediateInput *input, Output *output, int *result_count) {
   output[*result_count].line_numbers[output[*result_count].count] =
       input->line_number;
   output[*result_count].count++;
-  (*result_count)++;
+  (*result_count++);
 }
 
 void reduce(Output *output) {

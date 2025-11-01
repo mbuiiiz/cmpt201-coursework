@@ -90,7 +90,7 @@ void groupByKey(IntermediateInput *input, Output *output, int *result_count) {
   if (input == NULL || output == NULL || result_count == NULL)
     return;
 
-  // find if any doubled value is in the array
+    // find if any doubled value is in the array
   for (unsigned int i = 0; i < *result_count; i++) {
 
     if (output[i].doubled_value == input->doubled_value) {
@@ -106,7 +106,8 @@ void groupByKey(IntermediateInput *input, Output *output, int *result_count) {
   output[*result_count].line_numbers[output[*result_count].count] =
       input->line_number;
   output[*result_count].count++;
-  (*result_count)++;
+  *result_count++;
+  
 }
 
 void reduce(Output *output) {
@@ -123,5 +124,5 @@ void reduce(Output *output) {
     }
   }
 
-  printf("])\n");
+  printf("])");
 }
