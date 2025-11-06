@@ -1,0 +1,29 @@
+#define _DEFAULT_SOURCE_
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
+int main() {
+
+  const char *text = "Hello World!";
+  int length = strlen(text);
+  char buf[12];
+
+  int fd = open("tmp", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+
+  if(fd == -1){
+    perror("Open failed");
+    exit(1);
+  }
+
+  write(fd, text, length);
+  lseek(fd, -6, SEEK_CUR); // return offset backward by X/2 bytes
+  read(fd, buf, 6);
+
+  write(1, buf, 6);
+
+  close(fd);
+}

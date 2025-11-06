@@ -1,0 +1,24 @@
+#define _DEFAULT_SOURCE_
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(){
+  
+  const char *text = "Hello World!";
+  int length = strlen(text);
+  char buf[12];
+
+  int fd = open("tmp", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+
+  write(fd, text, length);
+  lseek(fd, -6, SEEK_CUR);
+  read(fd, buf, 6);
+
+  write(1, buf, 6);
+
+ close(fd); 
+  
+}

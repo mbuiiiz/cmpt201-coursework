@@ -1,0 +1,14 @@
+int main(){
+  int fd = open
+  if(fd == -1) _exit(1);
+
+  // write is unbuffered
+  write()
+
+  // this uses buffer
+  fprintf()
+
+  while(1){
+    sleep(30);
+  }
+}
