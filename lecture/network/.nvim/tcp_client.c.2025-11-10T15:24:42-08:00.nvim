@@ -1,0 +1,15 @@
+// client
+
+#include <stdio.h>
+
+int main(){
+  printf("CLIENT:\n");
+
+  // socket
+  // find
+  // listen
+  // accept
+  // read 
+  // close
+  return 0;
+}

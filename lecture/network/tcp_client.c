@@ -1,0 +1,41 @@
+// client
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <string.h>
+
+int main() {
+  printf("CLIENT:\n");
+
+  // socket
+  int socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+  if(socket_fd == -1){
+      perror("Socket failed");
+      exit(EXIT_FAILURE);
+  }
+
+  // bind 
+  struct sockaddr_un sockstruct;
+  sockstruct.sun_family = AF_UNIX;
+  snprintf(sockstruct.sun_path, 100, "socket_fun");
+  char sun_path[100];
+
+    if(connect(socket_fd, (struct sockaddr *)&sockstruct, sizeof(struct sock_addr_un)) == -1){
+    perror("connect");
+    exit(EXIT_FAILURE);
+  }
+
+  
+  // write a message to screen
+  char *msg = "Sockets are not fun";
+
+  int bytes_written = write(socket_fd, msg, strlen(msg));
+
+  // close
+  close(socket_fd);
+
+  return 0;
+}
