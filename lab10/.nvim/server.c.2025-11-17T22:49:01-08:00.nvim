@@ -40,6 +40,7 @@ so we can continuely check if aargs->run is true
 
 */
 
+#include <time.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -50,7 +51,6 @@ so we can continuely check if aargs->run is true
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
-#include <time.h>
 #include <unistd.h>
 #define BUF_SIZE 1024
 #define PORT 8001
