@@ -75,7 +75,7 @@ void *handle_client(void *arg) {
 
   // disconnect
   printf("Ending thread for client %d\n", client->client_id);
-  fflush(stdout); // need to flush because use stdout buffer
+  fflush(stdout);
 
   close(client->cfd);
   free(client);
